@@ -1,130 +1,129 @@
-# Day 18 — Main Studio · Ôn Đúng Chỗ Yếu
+# Day 18 + Day 20 — Ôn Đúng Chỗ Yếu (Human-Centered AI · Retention & Habit)
 
-> AI đọc các câu làm sai trong một bài quiz → đề xuất kế hoạch ôn đúng phần yếu.
+> Một trải nghiệm AI giúp **học sinh** hiểu đúng, tin đúng mức, giữ quyền kiểm soát và tiếp tục hoàn thành mục tiêu **khi AI không hoàn hảo** (Day 18) — và được phân tích để **giữ chân, tạo thói quen** (Day 20).
+
+**Hướng đề (Track):** AI Personal Assistant for Students &nbsp;·&nbsp; **Tính năng:** AI đọc bài quiz đã làm → chỉ ra chỗ yếu → đề xuất kế hoạch ôn → người học xem lại, sửa, chốt.
+
+> 🔀 Mở prototype và dùng thanh **Day 18 · Prototype** ⇄ **Day 20 · Retention & Habit** ở đầu trang để chuyển giữa hai phần. Day 18 (mục 00–07) giữ nguyên; Day 20 (mục 00–12) là phần bổ sung.
 
 **Nhóm thực hiện**
 
 | Họ tên | Mã học viên | Vai trò |
 |---|---|---|
 | Phạm Thị Tuyết Nga | 2A202600877 | **PM** — điều phối, present |
-| Nguyễn Văn Đoan | 2A202600795 | Dev — dựng prototype (Cách C) |
-| Đỗ Trung Kiên | 2A202600751 | Design — storyboard, UI (Cách A) |
-| Nguyễn Đông Anh |2A202600760| Research — phỏng vấn, vận hành WoZ (Cách B) |
-
-**Dự án:** Ôn Đúng Chỗ Yếu — AI gợi ý kế hoạch ôn từ câu quiz sai &nbsp;·&nbsp; **Vai trò của bạn:** PM (điều phối, present)
+| Nguyễn Văn Đoan | 2A202600795 | Dev — dựng prototype |
+| Đỗ Trung Kiên | 2A202600751 | Design — flow, UI, rationale |
+| Nguyễn Đông Anh | 2A202600760 | Research — kịch bản, feedback loop |
 
 ---
 
-## Artifacts trong repo
+## Artifact trong repo
 
 | File | Là gì | Cách mở |
 |---|---|---|
-| [`day18-present-board.html`](day18-present-board.html) | Present board đầy đủ 6 phần + artifact Cách A / B / C | Đúp chuột để mở; nút **In / Lưu PDF** để xuất bản nộp |
-| [`on-dung-cho-yeu-prototype.html`](on-dung-cho-yeu-prototype.html) | Prototype Cách C (clickable, 3 màn hình + 2 quiz mẫu) | Được nhúng trong board; cần để **cùng thư mục** với board |
+| [`day18-track1-prototype.html`](day18-track1-prototype.html) | **Prototype chính** — chứa cả Day 18 (mục 00–07) và Day 20 (mục 00–12) trong một file | Đúp chuột để mở trong trình duyệt; không cần internet, không cần backend |
 
-> 💡 Mở `day18-present-board.html` trước — đây là trang tổng. Hai file phải nằm cạnh nhau thì phần nhúng Cách C mới hiện. Nếu trình duyệt chặn file cục bộ, dùng nút *"Mở prototype ở tab mới"* trong board.
-
-**Build-up chain:** Day 16 artifact 02 (JTBD + pain mapping) → Present board Day 18 → `day18-present-board.html`
+> 💡 Toàn bộ bài nằm trong **một file HTML duy nhất**. Dùng thanh chuyển ở đầu trang để đi giữa Day 18 và Day 20.
 
 ---
 
-## 1. JTBD Checkpoint
+## Tính năng được thiết kế (đáp ứng yêu cầu Day 18)
 
-- **Core JTBD:** Khi vừa làm xong một bài quiz/kiểm tra, người học muốn biết **mình yếu ở đâu và nên ôn lại gì trước**, để lần sau làm tốt hơn — mà không phải tự dò lại từng câu.
-- **Current workflow:** Người học (hoặc giáo viên) tự xem lại bài, đếm câu sai, tự đoán mình yếu chủ đề nào, rồi tự tìm tài liệu ôn — thủ công, dễ bỏ sót, khó xếp ưu tiên.
-- **Pain step đau nhất:** Bước *“từ danh sách câu sai → ra được chủ đề yếu + kế hoạch ôn cụ thể”*. Tốn công, hay làm qua loa nên ôn không trúng.
-- **AI leverage point:** AI đọc các câu sai → nhóm theo chủ đề/khái niệm → xếp ưu tiên → sinh kế hoạch ôn. Con người chỉ xem lại và chỉnh.
-- **Điểm còn mơ hồ nhất:** Chốt **user là người học tự ôn** (HS cấp 3 / SV năm đầu), môn có chủ đề tách bạch như **Toán / Tiếng Anh** — vì câu hỏi gắn được vào khái niệm rõ ràng thì AI mới nhóm “chỗ yếu” đáng tin. Giáo viên chỉ là user phụ (xem tổng hợp lớp), không phải đối tượng test chính.
+Prototype thể hiện một trải nghiệm **thống nhất** xuyên suốt 4 giai đoạn, tổ chức theo đúng cấu trúc đề bài:
 
-_Tự kiểm 3 câu: bỏ AI đi job vẫn còn (✔) · pain nằm đúng 1 bước (✔) · hypothesis bám đúng lát cắt (✔)._
+| Mục | Nội dung | Năng lực chứng minh |
+|---|---|---|
+| **00 Flow map** | Sơ đồ tính năng + phạm vi (in/out) | Phạm vi rõ, không "ôm" cả sản phẩm |
+| **01 Onboarding** *(bắt buộc)* | Lần đầu dùng: AI làm được/không được gì · cần data nào · cấp & rút quyền | Đặt kỳ vọng đúng, tiến dần (không form dài) |
+| **02 Trong khi AI hỗ trợ** | Nhập quiz → loading → nhóm câu sai thành chủ đề yếu · **AI hỏi lại** khi bằng chứng yếu · lớp **bằng chứng** | During · Uncertainty · Explainability |
+| **03 Sau · Agency** | Kế hoạch ôn sửa được · phân biệt **dữ kiện vs suy luận** · đủ 3 mức tự chủ | **Act / Ask / Don't Act** |
+| **04 Lỗi & Khôi phục** | KB1: AI gán nhầm chủ đề → người dùng sửa → hệ thống xác nhận → tính lại. KB2: nhắc việc đã xong → dừng nhắc | 2 vòng recovery hoàn chỉnh |
+| **05 Feedback 2×2** | Ma trận đủ 4 ô (user/system × explicit/implicit) kèm ví dụ thật trong flow | Two-way feedback |
+| **06 Design rationale** | 5 quyết định lớn, lập luận theo rủi ro & khả năng khôi phục | Rationale đặt cạnh flow |
+| **07 Demo path** | Đường bấm 5 phút cho giảng viên | Demo đúng thời gian |
 
-## 2. Hypothesis
+### Các mức tự chủ trong prototype
 
-> **Người học sẽ _tin và làm theo_ kế hoạch ôn do AI đề xuất — _nếu_ AI chỉ rõ _vì sao_ mỗi chủ đề bị đánh dấu yếu (truy ngược về đúng các câu đã làm sai) và cho họ _xem lại + chỉnh sửa_ trước khi chốt.**
+- **Act** — AI tự sắp thứ tự ôn theo ưu tiên (rủi ro thấp, thấy ngay, **có nút hoàn tác**).
+- **Ask** — AI xin phép trước khi thêm buổi ôn vào lịch (tác động tới thời gian thật); AI hỏi lại khi một chủ đề chỉ có 1 câu sai.
+- **Don't Act** — AI **không** tự gửi kế hoạch cho giáo viên, không tự đánh dấu "đã giỏi", không chấm lại bài (khó hoàn tác / ảnh hưởng đánh giá).
 
-- **Thuộc phần nào:** Lõi giá trị — niềm tin vào output của AI (trust + comprehension).
-- **Nếu sai thì sập gì:** Người học không tin / không làm theo → dù AI phân tích đúng sản phẩm vẫn vô dụng → cả hướng “AI sinh kế hoạch ôn” sụp.
-- **Vì sao chọn:** Là giả định nền và rẻ để test trước bằng prototype/storyboard, không cần build hệ thống chấm + phân tích thật.
+### Lớp bằng chứng (Explainability)
 
-## 3. Current Approach Snapshot
+Mỗi chủ đề yếu đều truy ngược về đúng **các câu đã làm sai** ("Xem câu sai liên quan") — người học tự kiểm chứng và nhờ đó phát hiện được khi AI phân loại sai.
 
-- **Định làm gì:** Build hẳn một **web app** — làm quiz trong app → tự chấm → AI phân tích → sinh kế hoạch ôn → lưu tiến độ.
-- **Build lớn không:** Có, tương đối lớn.
-- **Tốn gì:** time (vài tuần) · scope rộng · phụ thuộc ngân hàng câu hỏi đã gắn tag · backend chấm · tích hợp LLM · DB · UI nhiều màn.
-- **Vì sao đắt/chậm:** Phải có đề + tag + cơ chế chấm **trước khi** test được điều thật sự cần biết (người dùng có tin kế hoạch không) — trong khi điều đó test được mà **chưa cần build gì**.
-- **Câu tự ép hỏi:** *“Còn cách nào rẻ hơn để test việc người dùng có tin + làm theo kế hoạch ôn mà chưa cần build cả app chấm điểm không?”*
+---
 
-## 4. Ba cách test rẻ hơn (cùng 1 hypothesis)
+## Kịch bản (đạt mức tối thiểu: 1 onboarding + 4 kịch bản)
 
-### Cách A — Storyboard “Từ điểm số đến kế hoạch” + phỏng vấn
-
-| Trường | Nội dung |
-|---|---|
-| Loại artifact | Storyboard 4 khung + script phỏng vấn |
-| Người dùng thấy gì | 4 khung: thấy điểm → bối rối → AI chỉ 3 chỗ yếu kèm lý do → nhận kế hoạch ôn 3 ngày |
-| Phía sau làm gì | Không có hệ thống thật; chỉ vẽ khung + chuẩn bị 5 câu hỏi phỏng vấn |
-| Vì sao rẻ hơn | 1–2 giờ vẽ; không code, không cần đề thật |
-| Học được gì | Phản ứng đầu tiên; chỗ gây nghi ngờ; ngôn ngữ người dùng mô tả “chỗ yếu” |
-| Chưa học được gì | Chưa biết khi tương tác thật (bấm, chỉnh) họ có tin không; chưa test luồng |
-| Artifact ở đâu | Trong `day18-present-board.html` (mục 4 · Cách A) |
-
-### Cách B — Wizard-of-Oz “AI giả lập qua tin nhắn”
-
-| Trường | Nội dung |
-|---|---|
-| Loại artifact | Kịch bản WoZ + mockup hội thoại chat |
-| Người dùng thấy gì | Gửi danh sách/ảnh câu sai qua chat → nhận lại phân tích chỗ yếu + kế hoạch ôn, như AI tự động |
-| Phía sau làm gì | Bạn đứng sau, dùng Claude/ChatGPT phân tích rồi chỉnh tay trước khi gửi (~3 phút/ca) |
-| Vì sao rẻ hơn | Không build app, không cần ngân hàng đề; dùng kênh chat sẵn có |
-| Học được gì | Có chịu gửi input không; chất lượng kế hoạch cần đạt mức nào để họ tin + làm theo |
-| Chưa học được gì | Chưa test UI/luồng bấm; không scale; phụ thuộc làm tay |
-| Artifact ở đâu | Trong `day18-present-board.html` (mục 4 · Cách B) |
-
-### Cách C — Clickable prototype “Ôn Đúng Chỗ Yếu”
-
-| Trường | Nội dung |
-|---|---|
-| Loại artifact | Prototype HTML, 3 màn hình + 2 quiz mẫu (`on-dung-cho-yeu-prototype.html`) |
-| Người dùng thấy gì | Bài làm có câu sai → màn AI phân tích chỗ yếu (kèm lý do) → màn kế hoạch ôn chỉnh sửa được |
-| Phía sau làm gì | Dữ liệu mẫu hard-code; logic nhóm câu sai + sinh kế hoạch chạy bằng JS — chưa có chấm/LLM thật |
-| Vì sao rẻ hơn | 1 file HTML chạy offline, không backend, không DB, không cần đề thật |
-| Học được gì | Khi tự bấm: có hiểu + tin không; “xem câu sai liên quan” có tăng niềm tin không; họ chỉnh kế hoạch thế nào |
-| Chưa học được gì | Chưa có dữ liệu thật; chưa biết độ chính xác khi phân tích bài thật; chưa test giữ chân lâu dài |
-| Artifact ở đâu | `on-dung-cho-yeu-prototype.html` (nhúng trong board) |
-
-## 5. So sánh nhanh
-
-| Tiêu chí | A · Storyboard | B · WoZ | C · Prototype |
+| # | Mã | Loại | Ở mục |
 |---|---|---|---|
-| Nhanh hơn ở đâu | Xong trong 1–2 giờ | Test ngay với người thật qua chat | Bấm thử được luồng đầy đủ ngay |
-| Rẻ hơn ở đâu | Chỉ vẽ tay/slide | Không build, dùng chat sẵn có | 1 file HTML, không backend |
-| Gần hành vi thật | Thấp — chỉ xem & kể | Cao — input/output thật | Trung bình–cao — thao tác thật, dữ liệu mẫu |
-| Học rõ nhất | Chỗ gây nghi ngờ ban đầu | Có chịu dùng + làm theo không | Hiểu / tin / chỉnh trên luồng thật |
-| Giới hạn lớn nhất | Không có tương tác | Làm tay, không scale | Dữ liệu chưa thật |
-
-- **Thuyết phục nhất khi present:** Cách C (bấm được).
-- **Dễ bị phản biện nhất:** Cách B (làm tay → “có scale không / có đúng AI tự động không”).
-
-## 6. Present prep + Post-present
-
-- **Mở khi present:** Board này + prototype Cách C (tab riêng).
-- **Câu mở đầu 30s:** *“Em test một niềm tin: người học chỉ làm theo kế hoạch ôn của AI khi AI chỉ rõ vì sao mình bị coi là yếu — nên em thử 3 cách rẻ để kiểm tra điều đó.”*
-- **Muốn lớp phản biện vào đâu:** Phần **lời giải thích “vì sao bị coi là yếu”** ở Cách C — việc truy ngược về đúng các câu đã làm sai (vd câu 2, 5, 9) đã đủ để người học tin và làm theo chưa, hay cần thêm bằng chứng/độ tin gì.
-- **2 câu hỏi cho lớp:** (1) Lý do “dựa trên câu 2, 5, 9” đã đủ để tin chưa? (2) Nên đầu tư tiếp cách nào để học được nhiều nhất với chi phí thấp?
-
-**Sau khi present** ✍️ _(điền sau buổi present):_ phản biện quan trọng nhất · cách bị hỏi nhiều nhất · cần chỉnh gì · giữ nguyên gì.
+| 1 | S0 — Onboarding lần đầu | *Bắt buộc* | 01 |
+| 2 | S2 — Nhiều chủ đề, xếp ưu tiên | Trong tương tác · Explainability | 02 |
+| 3 | S3 — Đề xuất kế hoạch ôn | Trong tương tác · Agency | 03 |
+| 4 | S6 — AI gán nhầm chủ đề | Sai sót & Khôi phục | 04 |
+| 5 | S8 — Nhắc việc đã ôn rồi | Sai sót & Khôi phục | 04 |
 
 ---
 
-## Chốt trước khi nộp
+## Demo path 5 phút (mục 07 trong prototype)
 
-- [x] Checkpoint lại JTBD
-- [x] Chọn đúng 1 hypothesis
-- [x] Ghi lại current approach
-- [x] Nghĩ ra 3 cách rẻ hơn để test cùng hypothesis
-- [x] Làm artifact cho cả 3 cách (A storyboard · B WoZ · C prototype)
-- [x] Gom thành present board (`day18-present-board.html`)
-- [x] Điền thông tin học viên + chốt các điểm còn mơ hồ
-- [ ] Present trước lớp → điền phần **“Sau khi present”** (mục 6) bằng phản hồi thật
+1. **00** — người dùng, vấn đề & tính năng
+2. **01** — onboarding 3 bước, cấp quyền đọc quiz
+3. **02** — cho AI phân tích, xem bằng chứng, trả lời câu AI hỏi lại
+4. **03** — hoàn tác sắp xếp (Act), trả lời thêm-vào-lịch (Ask), xem ranh giới Don't Act
+5. **04** — sửa chủ đề AI gán nhầm + dừng nhắc việc đã xong
+6. **05** — chỉ đủ 4 ô feedback
+7. **06** — quyết định quan trọng nhất (Don't Act) + rủi ro còn lại
 
-> **Ghi chú trung thực (theo PDF):** các quiz, câu trả lời và phản ứng người dùng trong repo này là **dữ liệu mẫu / nháp lý luận** để present được — *chưa phải evidence thật*. Các chỗ ✍️ là phần bạn thay bằng dự án + dữ liệu thật của mình. AI không bịa user/evidence thay bạn.
+---
+
+## Ghi chú trung thực
+
+Mọi quiz, câu trả lời và phản hồi AI trong prototype là **dữ liệu mẫu viết sẵn** để present — **chưa nối mô hình/AI thật** (đúng yêu cầu "prototype không cần kết nối API thật"). Trọng tâm là **trải nghiệm khi AI không hoàn hảo**, không phải độ chính xác của mô hình.
+
+## Đối chiếu điều kiện tối thiểu (mục 19 đề bài)
+
+- [x] Onboarding cho lần đầu sử dụng tính năng
+- [x] ≥ 4 kịch bản ngoài onboarding (2 tương tác + 2 sai sót/khôi phục)
+- [x] Trải nghiệm xuyên suốt Onboarding → During → After → Feedback
+- [x] Đủ Act / Ask / Don't Act
+- [x] ≥ 1 vòng feedback và recovery hoàn chỉnh
+- [x] Đủ 4 loại feedback trong ma trận 2×2
+- [x] ≥ 1 lớp bằng chứng / giải thích
+- [x] Design rationale đặt cạnh flow
+
+---
+
+## Day 20 — Retention, Engagement & Habit Loop (bổ sung)
+
+Tiếp tục cùng sản phẩm/persona Day 18. Mở thanh **Day 20** trong prototype (mục 00–12):
+
+| Mục | Đầu ra bắt buộc |
+|---|---|
+| 00 | Điểm xuất phát (giữ sản phẩm, scenario, persona, recovery flow Day 18) |
+| 01 | **Customer Retention Canvas** — Problem · Persona · Anti-persona · Why · Alternative · Frequency |
+| 02 | **Core Action & Active User** (định nghĩa + ngưỡng) |
+| 03 | **Retention metric theo natural frequency** (Weekly → WAU + cohort W1/W4) |
+| 04 | **Onboarding audit** — current-state journey + friction (Keep/Remove/Delay/Simplify) + bảng current state |
+| 05 | **Redesigned onboarding → first core action** + Activation/TTV |
+| 06 | **Before/After** + recovery path |
+| 07 | **Measurement Ladder** |
+| 08 | **North Star + ≤3 Input Metrics** + leading/lagging + trade-off |
+| 09 | **Nature vs Nurture** |
+| 10 | **Hook Review** (Trigger·Action·Variable Reward·Investment) + Hook flow |
+| 11 | **Metric Tracking Requirement** (định nghĩa metric + event + ≥4 tiêu chí nghiệm thu) |
+| 12 | **Demo path 8 phút** |
+
+**Tóm tắt product logic:** Use case (ôn đúng chỗ yếu sau quiz) → frequency **Weekly** → core action **chốt kế hoạch ôn** → active user **chốt ≥1 lần/tuần** → retention **WAU + cohort tuần** → North Star **số kế hoạch chốt/tuần**.
+
+### Checklist Day 20 (mục 23 đề bài)
+
+- [x] Một use case chính + Problem/Persona/Anti-persona/Why/Alternative; frequency suy từ hành vi thật
+- [x] Core action tạo value; active user có ngưỡng rõ; retention metric khớp frequency (không copy DAU/D7)
+- [x] Current-state journey + friction audit + redesigned journey + activation/TTFCA/TTV/aha
+- [x] Before/After cụ thể + giữ recovery flow Day 18
+- [x] Measurement Ladder + 1 North Star + ≤3 Input + leading/lagging + 1 trade-off
+- [x] Phân biệt nature/nurture; Hook Review đủ Trigger·Action·Reward·Investment; kiểm tra lợi ích cho user
+- [x] Metric có định nghĩa/công thức/window/segment; event map tới metric; ≥4 tiêu chí nghiệm thu
+- [x] Một file, phân biệt rõ phần Day 18 và Day 20; có demo path ≤ 8 phút
